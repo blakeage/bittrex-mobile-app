@@ -4,11 +4,11 @@ import styles from './styles';
 
 class HLText extends Component {
   render() {
-	return (
-	  <Text style={[styles.text, this.props.style]}>
-	  	{this.props.children} 
-	  </Text>
-	);
+  return (
+    <Text style={[styles.text, this.props.style]}>
+      {this.props.children} 
+    </Text>
+  );
   }
 }
 

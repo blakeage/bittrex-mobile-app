@@ -13,11 +13,13 @@ export default function wallet(state = { wallet: null, loading: true }, action) 
         ...state,                   // keep the existing state,
         loading: true,              // but change loading to true
       };
+
     case RECEIVE_WALLET:
       return {
         loading: false,
         wallet: action.wallet,
       };
+
     case RECEIVE_MARKET_SUMMARY:
       let newWallet = state.wallet;
       newWallet.setMarketSummary(action.market_summary);
@@ -25,8 +27,10 @@ export default function wallet(state = { wallet: null, loading: true }, action) 
         loading: false,
         wallet: newWallet 
       };
+
     case WALLET_ERROR:
       return state;
+
     default:
       return state;
   }

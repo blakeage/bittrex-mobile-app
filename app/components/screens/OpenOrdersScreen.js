@@ -6,77 +6,77 @@ import { connect } from 'react-redux';
 import { requestOpenOrders } from '../../actions/open_orders';
 
 class OpenOrdersScreen extends React.Component {
-	static navigationOptions = { title: 'Open Orders' };
+  static navigationOptions = { title: 'Open Orders' };
 
-	constructor(props) {
-		super(props);
-		this.state = { searchStr: null };
-	}
+  constructor(props) {
+    super(props);
+    this.state = { searchStr: null };
+  }
 
-	componentDidMount() {
-		this.props.loadOrders();
-	}
+  componentDidMount() {
+    this.props.loadOrders();
+  }
 
-	orders = () => {
-		if(!this.props.orders_list) return [];
-		return this.props.orders_list.search(this.state.searchStr);
-	}
+  orders = () => {
+    if(!this.props.orders_list) return [];
+    return this.props.orders_list.search(this.state.searchStr);
+  }
 
-	renderFooter = () => {
-		if (!this.props.loading) return null;
+  renderFooter = () => {
+    if (!this.props.loading) return null;
 
-		return (
-			<View style={{paddingVertical: 20, borderTopWidth: 1, borderColor: "#CED0CE"}}>
-				<ActivityIndicator animating size="large" />
-			</View>
-		);
-	};
+    return (
+      <View style={{paddingVertical: 20, borderTopWidth: 1, borderColor: "#CED0CE"}}>
+        <ActivityIndicator animating size="large" />
+      </View>
+    );
+  };
 
-	searchChanged = (text) => {
-		this.setState({ searchStr: text });
-	}
+  searchChanged = (text) => {
+    this.setState({ searchStr: text });
+  }
 
-	renderHeader = () => {
-		return (
-			<View style={{borderBottomWidth: 1, borderColor: '#CCC', paddingBottom: 10}}>
-				<TextInput keyboardType={this.props.keyboardType} 
-					placeholder="Search ..."
-					placeholderTextColor='#AAA'
-					underlineColorAndroid='transparent'
-					autoCorrect={false}
-					style={styles.textInput}
-					onChangeText={(text) => this.searchChanged(text)} />
-			</View>
-		);
-	}
+  renderHeader = () => {
+    return (
+      <View style={{borderBottomWidth: 1, borderColor: '#CCC', paddingBottom: 10}}>
+        <TextInput keyboardType={this.props.keyboardType} 
+          placeholder="Search ..."
+          placeholderTextColor='#AAA'
+          underlineColorAndroid='transparent'
+          autoCorrect={false}
+          style={styles.textInput}
+          onChangeText={(text) => this.searchChanged(text)} />
+      </View>
+    );
+  }
 
-	render() {
-		return (
-			<View style={styles.container}>
-				<FlatList
-					extraData={this.state}
-					data={this.orders()}
-					renderItem={({item}) => { return ( <OpenOrderListItem item={item} itemSelected={this._onSelectOrder} /> ); }}
-					keyExtractor={item => item.orderUuid}
-					ListFooterComponent={this.renderFooter}
-					ListHeaderComponent={this.renderHeader}
-				/>
-			</View>
-		);
-	}
+  render() {
+    return (
+      <View style={styles.container}>
+        <FlatList
+          extraData={this.state}
+          data={this.orders()}
+          renderItem={({item}) => { return ( <OpenOrderListItem item={item} itemSelected={this._onSelectOrder} /> ); }}
+          keyExtractor={item => item.orderUuid}
+          ListFooterComponent={this.renderFooter}
+          ListHeaderComponent={this.renderHeader}
+        />
+      </View>
+    );
+  }
 
-	// private methods
-	_onSelectOrder = (item) => {
-		const { navigate } = this.props.navigation;
-		navigate('OrderDetails', { order: item })
-	}
+  // private methods
+  _onSelectOrder = (item) => {
+    const { navigate } = this.props.navigation;
+    navigate('OrderDetails', { order: item })
+  }
 }
 
 const mapStateToProps = (state) => {
-	return {
-		loading: state.open_orders.loading,
-		orders_list: state.open_orders.orders_list
-	};
+  return {
+    loading: state.open_orders.loading,
+    orders_list: state.open_orders.orders_list
+  };
 };
 
 const mapDispatchToEvents = (dispatch) => {

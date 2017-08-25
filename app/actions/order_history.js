@@ -14,38 +14,38 @@ export function requestOrderHistory() {
 }
 
 function orderHistoryError(error) {
-	return {
+  return {
     type: ORDER_HISTORY_ERROR,
-		error
+    error
   }
 }
 
 export function fetchOrderHistory() {
-	return (dispatch) => {
-		if(ApiHelper.stubbing()) {
-			dispatch(receiveOrderHistory(order_history_data));	
-			return;
-		}
+  return (dispatch) => {
+    if(ApiHelper.stubbing()) {
+      dispatch(receiveOrderHistory(order_history_data));  
+      return;
+    }
 
-		var uri = ApiHelper.getApiUri('/account/getorderhistory');
-		fetch(uri, {
-			method: 'GET',
-			headers: { 'apisign': ApiHelper.getSignature(uri) }
-		})
-		.then(response => response.json())
-		.then(json => dispatch(receiveOrderHistory(json)))
-		.catch(error => dispatch(orderHistoryError(error)));
-	};
+    var uri = ApiHelper.getApiUri('/account/getorderhistory');
+    fetch(uri, {
+      method: 'GET',
+      headers: { 'apisign': ApiHelper.getSignature(uri) }
+    })
+    .then(response => response.json())
+    .then(json => dispatch(receiveOrderHistory(json)))
+    .catch(error => dispatch(orderHistoryError(error)));
+  };
 }
 
 export function receiveOrderHistory(json) {
-	let ordersList = new OrdersList();
-	let results = json.result;
+  let ordersList = new OrdersList();
+  let results = json.result;
 
-	if(results.length > 0) {
-		let orders = results.map((ord_data) => { return new ClosedOrder(ord_data); });
-		ordersList.set(orders);
-	}
+  if(results.length > 0) {
+    let orders = results.map((ord_data) => { return new ClosedOrder(ord_data); });
+    ordersList.set(orders);
+  }
   return {
     type: RECEIVE_ORDER_HISTORY,
     orders_list: ordersList 

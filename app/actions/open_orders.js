@@ -14,38 +14,38 @@ export function requestOpenOrders() {
 }
 
 function openOrdersError(error) {
-	return {
+  return {
     type: OPEN_ORDERS_ERROR,
-		error
+    error
   }
 }
 
 export function fetchOpenOrders() {
-	return (dispatch) => {
-		if(ApiHelper.stubbing()) {
-			dispatch(receiveOpenOrders(open_orders_data));	
-			return;
-		}
+  return (dispatch) => {
+    if(ApiHelper.stubbing()) {
+      dispatch(receiveOpenOrders(open_orders_data));  
+      return;
+    }
 
-		var uri = ApiHelper.getApiUri('/market/getopenorders');
-		fetch(uri, {
-			method: 'GET',
-			headers: { 'apisign': ApiHelper.getSignature(uri) }
-		})
-		.then(response => response.json())
-		.then(json => dispatch(receiveOpenOrders(json)))
-		.catch(error => dispatch(openOrdersError(error)));
-	};
+    var uri = ApiHelper.getApiUri('/market/getopenorders');
+    fetch(uri, {
+      method: 'GET',
+      headers: { 'apisign': ApiHelper.getSignature(uri) }
+    })
+    .then(response => response.json())
+    .then(json => dispatch(receiveOpenOrders(json)))
+    .catch(error => dispatch(openOrdersError(error)));
+  };
 }
 
 export function receiveOpenOrders(json) {
-	let ordersList = new OrdersList();
-	let results = json.result;
+  let ordersList = new OrdersList();
+  let results = json.result;
 
-	if(results.length > 0) {
-		let orders = results.map((ord_data) => { return new OpenOrder(ord_data); });
-		ordersList.set(orders);
-	}
+  if(results.length > 0) {
+    let orders = results.map((ord_data) => { return new OpenOrder(ord_data); });
+    ordersList.set(orders);
+  }
   return {
     type: RECEIVE_OPEN_ORDERS,
     orders_list: ordersList 
