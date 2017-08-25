@@ -1,0 +1,81 @@
+{
+  "result": [
+  {
+    "Currency": "ANS",
+      "Balance": 47.59667732,
+      "Available": 47.59667732,
+      "Pending": 0,
+      "CryptoAddress": null
+  },
+  {
+    "Currency": "BTC",
+    "Balance": 2.4e-7,
+    "Available": 2.4e-7,
+    "Pending": 0,
+    "CryptoAddress": null
+  },
+  {
+    "Currency": "DGB",
+    "Balance": 12182.94479508,
+    "Available": 12182.94479508,
+    "Pending": 0,
+    "CryptoAddress": null
+  },
+  {
+    "Currency": "ETH",
+    "Balance": 0.5,
+    "Available": 0.5,
+    "Pending": 0,
+    "CryptoAddress": "0x156e713a8023683566e681aaa68dd5d0c93e1168"
+  },
+  {
+    "Currency": "LBC",
+    "Balance": 138.53200005,
+    "Available": 138.53200005,
+    "Pending": 0,
+    "CryptoAddress": null
+  },
+  {
+    "Currency": "LSK",
+    "Balance": 53.6810263,
+    "Available": 53.6810263,
+    "Pending": 0,
+    "CryptoAddress": null
+  },
+  {
+    "Currency": "MAID",
+    "Balance": 0,
+    "Available": 0,
+    "Pending": 0,
+    "CryptoAddress": null
+  },
+  {
+    "Currency": "OMG",
+    "Balance": 0,
+    "Available": 0,
+    "Pending": 0,
+    "CryptoAddress": null
+  },
+  {
+    "Currency": "STORJ",
+    "Balance": 223.04710492,
+    "Available": 223.04710492,
+    "Pending": 0,
+    "CryptoAddress": null
+  },
+  {
+    "Currency": "STRAT",
+    "Balance": 69.06579232,
+    "Available": 69.06579232,
+    "Pending": 0,
+    "CryptoAddress": null
+  },
+  {
+    "Currency": "UBQ",
+    "Balance": 298.40680279,
+    "Available": 298.40680279,
+    "Pending": 0,
+    "CryptoAddress": null
+  }
+  ]
+}

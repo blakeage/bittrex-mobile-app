@@ -1,0 +1,37 @@
+import '../../shim.js';
+import crypto from 'crypto';
+
+class ApiHelper {
+  static _apikey = '';
+  static _apisecret = '';
+  static _apiBaseUri = 'https://bittrex.com/api';
+  static _apiVersion = 'v1.1';
+  static _stubData = false;
+
+  static stubbing() {
+    return ApiHelper._stubData;
+  }
+  
+  static getApiUri(endpoint) {
+    var base = ApiHelper._apiBaseUri + "/" + ApiHelper._apiVersion + endpoint;
+    if(endpoint.includes("/public/")) {
+      return base;
+    }
+    return base + ApiHelper._getQueryStr();
+  }
+
+  static getSignature(uri) {
+    return crypto.createHmac('SHA512', ApiHelper._apisecret).update(uri).digest('hex');
+  }
+
+  // private methods
+  static _getNonce() {
+    return new Date().getTime();
+  }
+
+  static _getQueryStr() {
+    return "?apikey=" + ApiHelper._apikey + "&nonce=" + ApiHelper._getNonce();
+  }
+}
+
+export default ApiHelper;

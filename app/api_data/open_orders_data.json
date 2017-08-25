@@ -1,0 +1,23 @@
+{
+  "result": [
+  {
+    "Uuid": null,
+      "OrderUuid": "4561e9a9-ef20-49e5-9ca3-ea145dfc13e4",
+      "Exchange": "BTC-XEL",
+      "OrderType": "LIMIT_SELL",
+      "Quantity": 2,
+      "QuantityRemaining": 2,
+      "Limit": 0.00082104,
+      "CommissionPaid": 0,
+      "Price": 0,
+      "PricePerUnit": null,
+      "Opened": "2017-08-19T22:11:21.637",
+      "Closed": null,
+      "CancelInitiated": false,
+      "ImmediateOrCancel": false,
+      "IsConditional": false,
+      "Condition": "NONE",
+      "ConditionTarget": null
+  } 
+  ]
+}
