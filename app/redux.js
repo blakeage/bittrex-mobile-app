@@ -6,7 +6,7 @@ import market_summary from './reducers/market_summary';
 
 import { fetchOrderHistory, REQUEST_ORDER_HISTORY, } from './actions/order_history';
 import { fetchOpenOrders, REQUEST_OPEN_ORDERS } from './actions/open_orders';
-import { fetchWallet, REQUEST_WALLET } from './actions/wallet';
+import { fetchBalances, REQUEST_BALANCES } from './actions/wallet';
 import { fetchMarketSummary, REQUEST_MARKET_SUMMARY } from './actions/market_summary';
 
 export const apiMiddleware = store => next => action => {
@@ -23,8 +23,8 @@ export const apiMiddleware = store => next => action => {
       store.dispatch(fetchOpenOrders());
       break;
 
-    case REQUEST_WALLET:
-      store.dispatch(fetchWallet());
+    case REQUEST_BALANCES:
+      store.dispatch(fetchBalances());
       break;
 
     case REQUEST_MARKET_SUMMARY:

@@ -1,31 +1,31 @@
 import Wallet from '../models/Wallet';
 import ApiHelper from '../models/ApiHelper';
 import { requestMarketSummary } from './market_summary';
-import wallet_data from "../api_data/wallet_data.json";
+import balances_data from "../api_data/balances_data.json";
 
-export const REQUEST_WALLET = 'REQUEST_WALLET';
-export const RECEIVE_WALLET = 'RECEIVE_WALLET';
-export const WALLET_ERROR = 'WALLET_ERROR';
+export const REQUEST_BALANCES = 'REQUEST_BALANCES';
+export const RECEIVE_BALANCES = 'RECEIVE_BALANCES';
+export const BALANCES_ERROR = 'BALANCES_ERROR';
 
-export function requestWallet() {
+export function requestBalances() {
   return {
-    type: REQUEST_WALLET
+    type: REQUEST_BALANCES
   }
 }
 
-function walletError(error) {
+function balancesError(error) {
   console.warn(error);
   return {
-    type: WALLET_ERROR,
+    type: BALANCES_ERROR,
     error
   }
 }
 
-export function fetchWallet() {
+export function fetchBalances() {
   return (dispatch) => {
     
     if(ApiHelper.stubbing()) {
-      dispatch(receiveWallet(wallet_data));
+      dispatch(receiveBalances(balances_data));
       dispatch(requestMarketSummary());
     }
     else {
@@ -35,14 +35,14 @@ export function fetchWallet() {
         headers: { 'apisign': ApiHelper.getSignature(uri) }
       })
       .then(response => response.json())
-      .then(json => dispatch(receiveWallet(json)))
+      .then(json => dispatch(receiveBalances(json)))
       .then(() => dispatch(requestMarketSummary()))
-      .catch(error => dispatch(walletError(error)));
+      .catch(error => dispatch(balancesError(error)));
     }
   };
 }
 
-export function receiveWallet(json) {
+export function receiveBalances(json) {
   let wallet = new Wallet();
   let results = json.result;
 
@@ -50,7 +50,7 @@ export function receiveWallet(json) {
     wallet.setCoins(results);
   }
   return { 
-    type: RECEIVE_WALLET,
+    type: RECEIVE_BALANCES,
     wallet: wallet
   };
 }

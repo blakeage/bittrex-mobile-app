@@ -4,7 +4,7 @@ import HLText from '../HLText/HLText';
 import WalletListItem from '../WalletListItem/WalletListItem';
 import Util from '../../models/Util';
 import { connect } from 'react-redux';
-import { requestWallet } from '../../actions/wallet';
+import { requestBalances } from '../../actions/wallet';
 import styles from '../../config/styles';
 
 class WalletScreen extends React.Component {
@@ -92,7 +92,7 @@ class WalletScreen extends React.Component {
   // private methods
   _onSelectCoin = (item) => {
     const { navigate } = this.props.navigation;
-    navigate('CoinDetails', { coin: item, marketSummary: this.props.marketSummary })
+    navigate('CoinDetails', { coin: item })
   }
 }
 
@@ -113,7 +113,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToEvents = (dispatch) => {
   return {
     loadWallet: () => {
-      dispatch(requestWallet());
+      dispatch(requestBalances());
     }
   };
 };

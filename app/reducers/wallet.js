@@ -1,20 +1,20 @@
 import { 
-  RECEIVE_WALLET,
-  REQUEST_WALLET,
-  WALLET_ERROR
+  RECEIVE_BALANCES,
+  REQUEST_BALANCES,
+  BALANCES_ERROR
 } from '../actions/wallet';
 
 import { RECEIVE_MARKET_SUMMARY } from '../actions/market_summary';
 
 export default function wallet(state = { wallet: null, loading: true }, action) {
   switch (action.type) {
-    case REQUEST_WALLET:
+    case REQUEST_BALANCES:
       return {
         ...state,                   // keep the existing state,
         loading: true,              // but change loading to true
       };
 
-    case RECEIVE_WALLET:
+    case RECEIVE_BALANCES:
       return {
         loading: false,
         wallet: action.wallet,
@@ -28,7 +28,7 @@ export default function wallet(state = { wallet: null, loading: true }, action) 
         wallet: newWallet 
       };
 
-    case WALLET_ERROR:
+    case BALANCES_ERROR:
       return state;
 
     default:
