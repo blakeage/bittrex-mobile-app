@@ -1,4 +1,4 @@
-# bittrex-react-native
+# Bittrex Mobile App
 An Unofficial (Work in Progress) React Native mobile app for Bittrex.com crypto-currency exchange 
 
 # NPM Crypto hack
