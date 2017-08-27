@@ -12,5 +12,5 @@ API keys are currently hard-coded in the app.
 ## Initial Goals
 Initial support is for READ-only access to the API, with the ability to trade coming afterwards.
 
-# Helpful links 
+## Related links 
 https://github.com/mvayngrib/react-native-crypto
