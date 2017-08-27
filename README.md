@@ -5,7 +5,7 @@ An Unofficial mobile app for [bittrex.com](http://bittrex.com) crypto-currency e
 The purpose of the project is to build a mobile app consuming the bittrex.com API.
 
 ## Technology
-The app is built in React Native, and uses Redux for state management. It is currently a work-in-progress, with READ-only capability.
+The app is built in [React Native](https://facebook.github.io/react-native), and uses [Redux](http://redux.js.org) for state management. It is currently a work-in-progress, with READ-only capability.
 
 API keys are currently hard-coded in the app, but the intention is to add a form in the app for entering these.
 
