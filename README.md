@@ -7,12 +7,10 @@ The purpose of the project is to build a mobile app consuming the bittrex.com AP
 ## Technology
 The app is built in [React Native](https://facebook.github.io/react-native), and uses [Redux](http://redux.js.org) for state management. It is currently a work-in-progress, with READ-only capability.
 
-API keys are currently hard-coded in the app, but the intention is to add a form in the app for entering these.
-
-A QR code on the website or some other method (from the Bittrex team) might work for storing these keys in the app, so that they don't have to entered manually.  The API does not currently provide an authentication endpoint, so a traditional login isn't possible via the API.
+API keys are currently hard-coded in the app, but the intention is to add a form in the app for entering these.  A QR code on the website or some other method (from the Bittrex team) might help for storing these keys in the app, so that they don't have to entered manually.  The API does not currently provide an authentication endpoint, so a traditional email/password login isn't possible.
 
 ## Initial Goals
-Initially, I'd like to support READ-only access to the API, with the ability to trade afterwards.
+Initial support is for READ-only access to the API, with the ability to trade coming afterwards.
 
 # Helpful links 
 https://github.com/mvayngrib/react-native-crypto
