@@ -1,7 +1,9 @@
 {
-  "result": [
-  {
-    "Uuid": null,
+  "success" : true,
+    "message" : "",
+    "result": [
+    {
+      "Uuid": null,
       "OrderUuid": "4561e9a9-ef20-49e5-9ca3-ea145dfc13e4",
       "Exchange": "BTC-XEL",
       "OrderType": "LIMIT_SELL",
@@ -18,6 +20,6 @@
       "IsConditional": false,
       "Condition": "NONE",
       "ConditionTarget": null
-  } 
-  ]
+    } 
+    ]
 }

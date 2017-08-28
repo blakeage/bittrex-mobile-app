@@ -1,6 +1,8 @@
 { 
-  "result": [{
-    "OrderUuid": "79de64f5-d07f-49c8-a38e-c5563bff7ee9",
+  "success" : true,
+    "message" : "",
+    "result": [{
+      "OrderUuid": "79de64f5-d07f-49c8-a38e-c5563bff7ee9",
       "Exchange": "BTC-DGB",
       "TimeStamp": "2017-07-26T23:43:52.733",
       "OrderType": "LIMIT_BUY",
@@ -15,7 +17,7 @@
       "ConditionTarget": null,
       "ImmediateOrCancel": false,
       "Closed": "2017-07-26T23:49:24.447"
-  },
+    },
     {
       "OrderUuid": "a4e8e484-79c0-4d73-95b8-7ab16e4b0f4b",
       "Exchange": "BTC-UBQ",
