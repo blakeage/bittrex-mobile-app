@@ -13,9 +13,8 @@ class MarketSummary {
   }
 
   getLast(market, coin) {
-    if(!this.hasCoinSummaries()) return 0; 
-    var coinSumm = this._coinSummaries.find(summary => summary.MarketName === market + "-" + coin);
-    return coinSumm === undefined ? undefined : coinSumm.Last;
+    if(!this.hasCoinSummaries() || coin == "BTC") return 0; 
+    return this._coinSummaries.find(summary => summary.MarketName === market + "-" + coin).Last;
   }
 }
 
