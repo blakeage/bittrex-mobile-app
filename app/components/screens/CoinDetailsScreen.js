@@ -16,13 +16,13 @@ class CoinDetailsScreen extends React.Component {
   constructor(props) {
     super(props);
     const { navigate } = this.props.navigation;
-    this.currency = props.navigation.state.params.coin.currency;
+    this._currency = props.navigation.state.params.coin.currency;
   }
 
   onRefresh = () => {
     this.props.loadWallet();
     this.props.loadOrders();
-    this.props.loadBalance(this.currency);
+    this.props.loadBalance(this._currency);
   }
 
   renderOrdersHeader = () => {
@@ -32,7 +32,7 @@ class CoinDetailsScreen extends React.Component {
           <Text style={[styles.label, styles.bigText]}>Order History</Text>
         </View>
 
-        { (!this.props.orders_list.exists(this.currency)) &&
+        { (!this.props.orders_list.exists(this._currency)) &&
           <View style={{marginTop: 10}}><Text>No orders yet</Text></View>
         }
       </View>
@@ -41,8 +41,8 @@ class CoinDetailsScreen extends React.Component {
 
   render() {
     var btcPrice = this.props.market_summary.getLast("USDT", "BTC");
-    var last = this.props.market_summary.getLast("BTC", this.currency);
-    var coinDetails = this.props.wallet.getBalanceOf(this.currency);
+    var last = this.props.market_summary.getLast("BTC", this._currency);
+    var coinDetails = this.props.wallet.getBalanceOf(this._currency);
 
     return (
       <ScrollView
@@ -57,7 +57,7 @@ class CoinDetailsScreen extends React.Component {
           <View style={styles.summaryPanel}>
           
             <View style={{paddingBottom: 10, flexDirection: 'row'}}>
-              { coinDetails.currency == "BTC" || coinDetails.currency == "BCC" ? (
+              { this._currency == "BTC" || this._currency == "BCC" ? (
                 <Text style={[styles.label, styles.bigText]}>Market Value: <HLText>${Util.round(btcPrice * coinDetails.available, 2)}</HLText> / <HLText>{coinDetails.available} BTC</HLText></Text>
               ) : (
                 <Text style={[styles.label, styles.bigText]}>Market Value: <HLText>${Util.round(btcPrice * coinDetails.available * last, 2)}</HLText> / <HLText>{Util.round(coinDetails.available * last, 8)} BTC</HLText></Text>
@@ -86,7 +86,7 @@ class CoinDetailsScreen extends React.Component {
           <View style={styles.container}> 
             <FlatList
               extraData={this.state}
-              data={this.props.orders_list.search(coinDetails.currency)}
+              data={this.props.orders_list.search(this._currency)}
               renderItem={({item}) => { return ( <ClosedOrderListItem item={item} itemSelected={this._onSelectOrder} /> ); }}
               keyExtractor={item => item.orderUuid}
               ListHeaderComponent={this.renderOrdersHeader}
