@@ -73,7 +73,7 @@ class WalletScreen extends React.Component {
         <FlatList
           extraData={this.state}
           data={this.wallet_data()}
-          keyExtractor={coin => coin.Currency}
+          keyExtractor={coin => coin.currency}
           renderItem={({item}) => { 
               return ( 
                 <WalletListItem item={item} btc_price={btcPrice} itemSelected={this._onSelectCoin} />

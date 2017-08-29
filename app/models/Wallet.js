@@ -1,59 +1,83 @@
+import CoinBalance from './CoinBalance';
+
 class Wallet {
   constructor() {
-    this._coins = [];
+    this._coinBalances = [];
     this._marketSummary = null;
   }
 
-  setCoins(coins) {
-    this._coins = coins;
+  setCoinBalances(coinBalances) {
+    this._coinBalances = coinBalances;
   }
 
   setMarketSummary(ms) {
     this._marketSummary = ms;
   }
 
-  hasCoins() {
-    return this._coins.length > 0;
+  hasCoinBalances() {
+    return this._coinBalances.length > 0;
+  }
+
+  setCoinBalance(currency, balance) {
+    this._coinBalances = this._coinBalances.map((bal, index) => {
+      if(bal.currency.toLowerCase().indexOf(currency.toLowerCase()) != -1) {
+        return new CoinBalance(balance);
+      }
+      else {
+        return bal;
+      }
+    });
+  }
+
+  getBalanceOf(currency) {
+    if(!this.hasCoinBalances()) return null;
+    return this._coinBalances.find(coin => coin.currency.toLowerCase().indexOf(currency.toLowerCase()) != -1);
   }
 
   getCoinsWithMarketLast(showZero) {
-    var marketSummary = this._getMarketSummary();
-    if(!this.hasCoins() || !marketSummary.hasCoinSummaries()) return [];
+    var ms = this._getMarketSummary();
+    if(!this.hasCoinBalances() 
+    || !ms
+    || !ms.hasCoinSummaries()) return [];
 
     var coinsWithPrice = this._filterCoins(showZero);
-    coinsWithPrice.map(coin => coin.Last = marketSummary.getLast("BTC", coin.Currency));
+    coinsWithPrice.map(coin => coin.last = ms.getLast("BTC", coin.currency));
     return coinsWithPrice;
   }
 
   getTotalBtc() {
-    var marketSummary = this._getMarketSummary();
-    if(!this.hasCoins() || !marketSummary.hasCoinSummaries()) return 0;
+    var ms = this._getMarketSummary();
+    if(!this.hasCoinBalances() 
+    || !ms
+    || !ms.hasCoinSummaries()) return 0;
 
     var total = 0;
-    this._getCoins().forEach(function(coin) {
-      if(coin.Currency == "BTC") {
-        total += coin.Available;
+    this._getCoinBalances().forEach(function(coin) {
+      if(coin.currency == "BTC") {
+        total += coin.available;
       }
       else {
-        total += coin.Available * marketSummary.getLast("BTC", coin.Currency);
+        total += coin.available * ms.getLast("BTC", coin.currency);
       }
     });
     return total;
   }
 
   getTotalUsd() {
-    return this.getTotalBtc() * this._getMarketSummary().getLast("USDT", "BTC"); 
+    var ms = this._getMarketSummary();
+    if(!ms) return 0;
+    return this.getTotalBtc() * ms.getLast("USDT", "BTC"); 
   }
 
   // private methods
-  _getCoins() {
-    return this._coins;
+  _getCoinBalances() {
+    return this._coinBalances;
   }
 
   _filterCoins(showZero) {
-    var coins = this._getCoins();
+    var coins = this._getCoinBalances();
     if(!showZero) {
-      return coins.filter(coin => coin.Balance > 0);
+      return coins.filter(coin => coin.balance > 0);
     }
     return coins;
   }
