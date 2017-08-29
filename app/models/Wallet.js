@@ -29,7 +29,7 @@ class Wallet {
   }
 
   getCoinsWithMarketLast(showZero) {
-    var ms = this._getMarketSummary();
+    let ms = this._getMarketSummary();
     if(!this.hasCoinBalances() 
     || !ms
     || !ms.hasCoinSummaries()) return [];
@@ -40,12 +40,12 @@ class Wallet {
   }
 
   getTotalBtc() {
-    var ms = this._getMarketSummary();
+    let ms = this._getMarketSummary();
     if(!this.hasCoinBalances() 
     || !ms
     || !ms.hasCoinSummaries()) return 0;
 
-    var total = 0;
+    let total = 0;
     this._getCoinBalances().forEach(function(coin) {
       if(coin.currency == "BTC") {
         total += coin.available;
@@ -58,7 +58,7 @@ class Wallet {
   }
 
   getTotalUsd() {
-    var ms = this._getMarketSummary();
+    let ms = this._getMarketSummary();
     if(!ms) return 0;
     return this.getTotalBtc() * ms.getLast("USDT", "BTC"); 
   }
@@ -69,7 +69,7 @@ class Wallet {
   }
 
   _filterCoins(showZero) {
-    var coins = this._getCoinBalances();
+    let coins = this._getCoinBalances();
     if(!showZero) {
       return coins.filter(coin => coin.balance > 0);
     }
