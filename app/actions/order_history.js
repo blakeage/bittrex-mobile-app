@@ -14,6 +14,7 @@ export function requestOrderHistory() {
 }
 
 function orderHistoryError(error) {
+  console.warn(error);
   return {
     type: ORDER_HISTORY_ERROR,
     error

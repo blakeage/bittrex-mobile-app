@@ -14,6 +14,7 @@ export function requestOpenOrders() {
 }
 
 function openOrdersError(error) {
+  console.warn(error);
   return {
     type: OPEN_ORDERS_ERROR,
     error
