@@ -29,7 +29,7 @@ class Wallet {
     });
   }
 
-  getBalanceOf(currency) {
+  getCoinBalance(currency) {
     if(!this.hasCoinBalances()) return null;
     return this._coinBalances.find(coin => coin.currency.toLowerCase().indexOf(currency.toLowerCase()) != -1);
   }

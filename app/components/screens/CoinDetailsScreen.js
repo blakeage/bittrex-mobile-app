@@ -42,7 +42,7 @@ class CoinDetailsScreen extends React.Component {
   render() {
     var btcPrice = this.props.market_summary.getLast("USDT", "BTC");
     var last = this.props.market_summary.getLast("BTC", this._currency);
-    var coinDetails = this.props.wallet.getBalanceOf(this._currency);
+    var coinBal = this.props.wallet.getCoinBalance(this._currency);
 
     return (
       <ScrollView
@@ -58,24 +58,24 @@ class CoinDetailsScreen extends React.Component {
           
             <View style={{paddingBottom: 10, flexDirection: 'row'}}>
               { this._currency == "BTC" || this._currency == "BCC" ? (
-                <Text style={[styles.label, styles.bigText]}>Market Value: <HLText>${Util.round(btcPrice * coinDetails.available, 2)}</HLText> / <HLText>{coinDetails.available} BTC</HLText></Text>
+                <Text style={[styles.label, styles.bigText]}>Market Value: <HLText>${Util.round(btcPrice * coinBal.available, 2)}</HLText> / <HLText>{coinBal.available} BTC</HLText></Text>
               ) : (
-                <Text style={[styles.label, styles.bigText]}>Market Value: <HLText>${Util.round(btcPrice * coinDetails.available * last, 2)}</HLText> / <HLText>{Util.round(coinDetails.available * last, 8)} BTC</HLText></Text>
+                <Text style={[styles.label, styles.bigText]}>Market Value: <HLText>${Util.round(btcPrice * coinBal.available * last, 2)}</HLText> / <HLText>{Util.round(coinBal.available * last, 8)} BTC</HLText></Text>
               )}
             </View>
 
             <View style={{paddingBottom: 10, flexDirection: 'row'}}>
               <View style={{flex: .5}}>
-                <Text style={styles.label}>Available Balance: </Text><Text>{coinDetails.available}</Text>
+                <Text style={styles.label}>Available Balance: </Text><Text>{coinBal.available}</Text>
               </View>
               <View style={{flex: .5, justifyContent: 'flex-end'}}>
-                <Text style={styles.label}>Pending Deposit: </Text><Text>{coinDetails.pending}</Text>
+                <Text style={styles.label}>Pending Deposit: </Text><Text>{coinBal.pending}</Text>
               </View>
             </View>
 
             <View style={{paddingBottom: 10, flexDirection: 'row'}}>
               <View style={{flex: .5}}>
-                <Text style={styles.label}>Total: </Text><Text>{coinDetails.balance}</Text>
+                <Text style={styles.label}>Total: </Text><Text>{coinBal.balance}</Text>
               </View>
               <View style={{flex: .5, justifyContent: 'flex-end'}}>
                 <Text style={styles.label}>Last: </Text><Text>{last}</Text>
