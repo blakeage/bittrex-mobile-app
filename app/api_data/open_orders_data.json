@@ -1,25 +1,25 @@
 {
-  "success" : true,
-    "message" : "",
+  "success": true,
+    "message": "",
     "result": [
     {
       "Uuid": null,
-      "OrderUuid": "4561e9a9-ef20-49e5-9ca3-ea145dfc13e4",
-      "Exchange": "BTC-XEL",
+      "OrderUuid": "7d193a37-a190-4247-84fb-86bc4d03ddc4",
+      "Exchange": "BTC-XVG",
       "OrderType": "LIMIT_SELL",
-      "Quantity": 2,
-      "QuantityRemaining": 2,
-      "Limit": 0.00082104,
+      "Quantity": 20000,
+      "QuantityRemaining": 20000,
+      "Limit": 0.000001,
       "CommissionPaid": 0,
       "Price": 0,
       "PricePerUnit": null,
-      "Opened": "2017-08-19T22:11:21.637",
+      "Opened": "2017-08-28T20:40:02.76",
       "Closed": null,
       "CancelInitiated": false,
       "ImmediateOrCancel": false,
       "IsConditional": false,
       "Condition": "NONE",
       "ConditionTarget": null
-    } 
+    }
     ]
 }
