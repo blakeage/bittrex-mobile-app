@@ -19,13 +19,24 @@ class CoinDetailsScreen extends React.Component {
     this._currency = props.navigation.state.params.coin.currency;
   }
 
+  componentDidMount() {
+    this.props.loadOrders();
+  }
+
   onRefresh = () => {
     this.props.loadWallet();
     this.props.loadOrders();
     this.props.loadBalance(this._currency);
   }
 
+  orders_data = () => {
+    if(this.props.loading) return [];
+    return this.props.orders_list.search(this._currency);
+  }
+
   renderOrdersHeader = () => {
+    if(this.props.loading) return null; 
+
     return (
       <View>
         <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderBottomWidth: 1, borderColor: '#CCC', paddingBottom: 10}}>
@@ -86,7 +97,7 @@ class CoinDetailsScreen extends React.Component {
           <View style={styles.container}> 
             <FlatList
               extraData={this.state}
-              data={this.props.orders_list.search(this._currency)}
+              data={this.orders_data()}
               renderItem={({item}) => { return ( <ClosedOrderListItem item={item} itemSelected={this._onSelectOrder} /> ); }}
               keyExtractor={item => item.orderUuid}
               ListHeaderComponent={this.renderOrdersHeader}
