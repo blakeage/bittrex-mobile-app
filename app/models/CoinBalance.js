@@ -1,6 +1,11 @@
 class CoinBalance {
 
   constructor(attributes) {
+    this.populateFromData(attributes);
+    this.last = 0.0;
+  }
+
+  populateFromData(attributes) {
     this.currency = attributes.Currency;
     this.balance = attributes.Balance;
     this.available = attributes.Available;

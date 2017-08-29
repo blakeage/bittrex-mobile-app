@@ -34,7 +34,7 @@ export default function wallet(state = { wallet: null, loading: true }, action) 
 
     case RECEIVE_BALANCE:
       var newWallet = state.wallet;
-      newWallet.setCoinBalance(action.balance.Currency, action.balance);
+      newWallet.updateCoinBalance(action.balance.Currency, action.balance);
       return {
         loading: false,
         wallet: newWallet,
