@@ -12,12 +12,12 @@ class ApiHelper {
     return ApiHelper._stubData;
   }
   
-  static getApiUri(endpoint) {
+  static getApiUri(endpoint, params={}) {
     var base = ApiHelper._apiBaseUri + "/" + ApiHelper._apiVersion + endpoint;
     if(endpoint.includes("/public/")) {
       return base;
     }
-    return base + ApiHelper._getQueryStr();
+    return base + ApiHelper._getQueryStr(params);
   }
 
   static getSignature(uri) {
@@ -29,8 +29,15 @@ class ApiHelper {
     return new Date().getTime();
   }
 
-  static _getQueryStr() {
-    return "?apikey=" + ApiHelper._apikey + "&nonce=" + ApiHelper._getNonce();
+  static _getQueryStr(params) {
+    let baseStr = "?apikey=" + ApiHelper._apikey;
+
+    if(Object.keys(params).length > 0) {
+      for (let key of Object.keys(params)) {
+        baseStr += "&" + key + "=" + params[key];
+      }        
+    }
+    return baseStr + "&nonce=" + ApiHelper._getNonce();
   }
 }
 
