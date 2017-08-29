@@ -33,7 +33,7 @@ class ClosedOrderListItem extends Component {
               <Text><Text style={styles.label}>Order Type:</Text> <Text style={{fontStyle: 'italic'}}>{this._order.orderTypeStr()}</Text></Text>
             </View>         
             <View style={{flex: .6}}>
-              <Text><Text style={styles.label}>Actual Rate:</Text> {this._order.pricePerUnit}</Text>
+              <Text><Text style={styles.label}>Actual Rate:</Text> {Util.formatNbr(this._order.pricePerUnit, 8)}</Text>
             </View>
           </View>
         </View>

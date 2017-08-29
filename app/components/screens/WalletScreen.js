@@ -60,7 +60,7 @@ class WalletScreen extends React.Component {
 
         <View style={styles.listHeader}>
           <Text style={{fontWeight: 'bold'}}>Estimated Value:</Text>
-          <HLText>{Util.round(this.props.wallet.getTotalBtc(), 8)} BTC / ${Util.round(this.props.wallet.getTotalUsd(), 2)} USD</HLText>
+          <HLText>{Util.formatNbr(this.props.wallet.getTotalBtc(), 8)} BTC / ${Util.round(this.props.wallet.getTotalUsd(), 2)} USD</HLText>
         </View>
       </View>
     );

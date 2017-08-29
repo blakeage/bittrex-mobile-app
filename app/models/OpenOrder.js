@@ -17,9 +17,9 @@ class OpenOrder extends Order {
 
   estTotal() {
     if(this.orderType == 'LIMIT_BUY') {
-      return -1 * Util.round(this.quantity * this.limit + this.fee(), 8);
+      return -1 * Util.formatNbr(this.quantity * this.limit + this.fee(), 8);
     }
-    return Util.round(this.quantity * this.limit - this.fee(), 8);
+    return Util.formatNbr(this.quantity * this.limit - this.fee(), 8);
   }
 }
 

@@ -17,19 +17,13 @@ class CompletedOrdersScreen extends React.Component {
     this.props.loadOrders();
   }
 
-  renderFooter = () => {
-    if (!this.props.loading) return null;
-
-    return (
-      <View style={{paddingVertical: 20, borderTopWidth: 1, borderColor: "#CED0CE"}}>
-        <ActivityIndicator animating size="large" />
-      </View>
-    );
-  };
-
   orders = () => {
-    if(!this.props.orders_list) return [];
+    if(this.props.loading) return [];
     return this.props.orders_list.search(this.state.searchStr);
+  }
+
+  onRefresh = () => {
+    this.props.loadOrders();
   }
   
   searchChanged = (text) => {
@@ -58,8 +52,9 @@ class CompletedOrdersScreen extends React.Component {
           extraData={this.state}
           renderItem={({item}) => { return ( <ClosedOrderListItem item={item} itemSelected={this._onSelectOrder} /> ); }}
           keyExtractor={item => item.orderUuid}
-          ListFooterComponent={this.renderFooter}
           ListHeaderComponent={this.renderHeader}
+          refreshing={this.props.loading}
+          onRefresh={this.onRefresh}
         />
       </View>
     );

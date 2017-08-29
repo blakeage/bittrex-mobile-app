@@ -19,7 +19,7 @@ class WalletListItem extends Component {
               <Text><Text style={styles.label}>Currency:</Text> <HLText>{this.props.item.currency}</HLText></Text>
             </View>
             <View style={{flex: .5}}>
-              <Text><Text style={styles.label}>Balance:</Text> {this.props.item.available}</Text>
+              <Text><Text style={styles.label}>Balance:</Text> {Util.formatNbr(this.props.item.available, 8)}</Text>
             </View>
           </View>
 
@@ -30,16 +30,16 @@ class WalletListItem extends Component {
             </View>
 
             <View style={{flex: .5}}>
-              <Text><Text style={styles.label}>Total:</Text> {this.props.item.balance}</Text>
+              <Text><Text style={styles.label}>Total:</Text> {Util.formatNbr(this.props.item.balance, 8)}</Text>
             </View>
           </View>
 
           <View style={{flexDirection: 'row'}}>
             <View style={{flex: 1}}>
               { this.props.item.currency == "BTC" || this.props.item.currency == "BCC" ? (
-                <Text><Text style={styles.label}>Market Value:</Text> <HLText>${Util.round(this.props.btc_price * this.props.item.available, 2)} USD</HLText> / {this.props.item.available} BTC</Text>
+                <Text><Text style={styles.label}>Market Value:</Text> <HLText>${Util.round(this.props.btc_price * this.props.item.available, 2)} USD</HLText> / {Util.formatNbr(this.props.item.available, 8)} BTC</Text>
               ) : (
-                <Text><Text style={styles.label}>Market Value:</Text> <HLText>${Util.round(this.props.btc_price * this.props.item.available * this.props.item.last, 2)} USD</HLText> / {Util.round(this.props.item.available * this.props.item.last, 8)} BTC</Text>
+                <Text><Text style={styles.label}>Market Value:</Text> <HLText>${Util.round(this.props.btc_price * this.props.item.available * this.props.item.last, 2)} USD</HLText> / {Util.formatNbr(this.props.item.available * this.props.item.last, 8)} BTC</Text>
               )}
             </View>
           </View>

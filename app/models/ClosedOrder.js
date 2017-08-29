@@ -11,9 +11,9 @@ class ClosedOrder extends Order {
 
   cost() {
     if(this.orderType == 'LIMIT_BUY') {
-      return -1 * Util.round(this.price + this.commission, 8);
+      return -1 * Util.formatNbr(this.price + this.commission, 8);
     }
-    return Util.round(this.price - this.commission, 8);
+    return Util.formatNbr(this.price - this.commission, 8);
   }
 }
 

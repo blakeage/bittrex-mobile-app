@@ -60,7 +60,7 @@ class CoinDetailsScreen extends React.Component {
               { this._currency == "BTC" || this._currency == "BCC" ? (
                 <Text style={[styles.label, styles.bigText]}>Market Value: <HLText>${Util.round(btcPrice * coinBal.available, 2)}</HLText> / <HLText>{coinBal.available} BTC</HLText></Text>
               ) : (
-                <Text style={[styles.label, styles.bigText]}>Market Value: <HLText>${Util.round(btcPrice * coinBal.available * last, 2)}</HLText> / <HLText>{Util.round(coinBal.available * last, 8)} BTC</HLText></Text>
+                <Text style={[styles.label, styles.bigText]}>Market Value: <HLText>${Util.round(btcPrice * coinBal.available * last, 2)}</HLText> / <HLText>{Util.formatNbr(coinBal.available * last, 8)} BTC</HLText></Text>
               )}
             </View>
 

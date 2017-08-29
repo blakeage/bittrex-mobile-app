@@ -24,7 +24,7 @@ class OpenOrderListItem extends Component {
               <Text><Text style={styles.label}>Market:</Text> <HLText>{this._order.exchange}</HLText></Text>
             </View>
             <View style={{flex: .5}}>
-              <Text><Text style={styles.label}>Bid/Ask:</Text> {this._order.limit}</Text>
+              <Text><Text style={styles.label}>Bid/Ask:</Text> {Util.formatNbr(this._order.limit, 8)}</Text>
             </View>
           </View>
 
@@ -42,7 +42,7 @@ class OpenOrderListItem extends Component {
               <Text><Text style={styles.label}>Order Type:</Text> <Text style={{fontStyle: 'italic'}}>{this._order.orderTypeStr()}</Text></Text>
             </View>         
             <View style={{flex: .5}}>
-              <Text><Text style={styles.label}>Actual Rate:</Text> {this._order.pricePerUnit ? Util.round(this._order.pricePerUnit, 8) : Util.round(0, 8)}</Text>
+              <Text><Text style={styles.label}>Actual Rate:</Text> {this._order.pricePerUnit ? Util.formatNbr(this._order.pricePerUnit, 8) : Util.formatNbr(0, 8)}</Text>
             </View>
           </View>
 

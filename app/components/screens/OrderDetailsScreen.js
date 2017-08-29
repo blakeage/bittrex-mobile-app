@@ -52,10 +52,10 @@ class OrderDetailsScreen extends React.Component {
 
         <View style={{paddingBottom: 10, flexDirection: 'row'}}>
           <View style={{flex: .5}}>
-            <Text style={styles.label}>Bid/Ask: </Text><Text>{this._order.limit}</Text>
+            <Text style={styles.label}>Bid/Ask: </Text><Text>{Util.formatNbr(this._order.limit, 8)}</Text>
           </View>
           <View style={{flex: .5, justifyContent: 'flex-end'}}>
-            <Text style={styles.label}>Actual Rate: </Text><Text>{this._order.pricePerUnit ? Util.round(this._order.pricePerUnit, 8) : Util.round(0, 8)}</Text>
+            <Text style={styles.label}>Actual Rate: </Text><Text>{this._order.pricePerUnit ? Util.formatNbr(this._order.pricePerUnit, 8) : Util.formatNbr(0, 8)}</Text>
           </View>
         </View>
 
