@@ -20,15 +20,11 @@ class CoinDetailsScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.props.loadWallet(false);
-    this.props.loadOrders(false);
-    this.props.loadBalance(false, this._currency);
+    this._loadData(false);
   }
 
   onRefresh = () => {
-    this.props.loadWallet(true);
-    this.props.loadOrders(true);
-    this.props.loadBalance(true, this._currency);
+    this._loadData(true);
   }
 
   orders_data = () => {
@@ -113,6 +109,12 @@ class CoinDetailsScreen extends React.Component {
   _onSelectOrder = (item) => {
     const { navigate } = this.props.navigation;
     navigate('OrderDetails', { order: item })
+  }
+
+  _loadData = (forceRefresh) => {
+    this.props.loadWallet(forceRefresh);
+    this.props.loadOrders(forceRefresh);
+    this.props.loadBalance(forceRefresh, this._currency);
   }
 }
 
