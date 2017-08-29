@@ -34,9 +34,9 @@ class Wallet {
     || !ms
     || !ms.hasCoinSummaries()) return [];
 
-    var coinsWithPrice = this._filterCoins(showZero);
-    coinsWithPrice.map(coin => coin.last = ms.getLast("BTC", coin.currency));
-    return coinsWithPrice;
+    var coinsWithLast = this._filterCoins(showZero);
+    coinsWithLast.map(coin => coin.last = ms.getLast("BTC", coin.currency));
+    return coinsWithLast;
   }
 
   getTotalBtc() {
