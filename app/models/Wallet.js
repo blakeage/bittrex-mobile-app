@@ -19,12 +19,12 @@ class Wallet {
   }
 
   setCoinBalance(currency, balance) {
-    this._coinBalances = this._coinBalances.map((bal, index) => {
-      if(bal.currency.toLowerCase().indexOf(currency.toLowerCase()) != -1) {
+    this._coinBalances = this._coinBalances.map((cBal, index) => {
+      if(cBal.currency.toLowerCase().indexOf(currency.toLowerCase()) != -1) {
         return new CoinBalance(balance);
       }
       else {
-        return bal;
+        return cBal;
       }
     });
   }
