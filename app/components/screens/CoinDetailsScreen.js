@@ -20,13 +20,15 @@ class CoinDetailsScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.props.loadOrders();
+    this.props.loadWallet(false);
+    this.props.loadOrders(false);
+    this.props.loadBalance(false, this._currency);
   }
 
   onRefresh = () => {
-    this.props.loadWallet();
-    this.props.loadOrders();
-    this.props.loadBalance(this._currency);
+    this.props.loadWallet(true);
+    this.props.loadOrders(true);
+    this.props.loadBalance(true, this._currency);
   }
 
   orders_data = () => {
@@ -133,14 +135,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToEvents = (dispatch) => {
   return {
-    loadOrders: () => {
-      dispatch(requestOrderHistory());
+    loadOrders: (forceRefresh) => {
+      dispatch(requestOrderHistory(forceRefresh));
     },
-    loadWallet: () => {
-      dispatch(requestBalances());
+    loadWallet: (forceRefresh) => {
+      dispatch(requestBalances(forceRefresh));
     },
-    loadBalance: (currency) => {
-      dispatch(requestBalance(currency));
+    loadBalance: (forceRefresh, currency) => {
+      dispatch(requestBalance(forceRefresh, currency));
     }
   };
 };

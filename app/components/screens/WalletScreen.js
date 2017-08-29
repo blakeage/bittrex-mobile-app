@@ -18,7 +18,7 @@ class WalletScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.props.loadWallet();
+    this.props.loadBalances(false);
   }
 
   wallet_data = () => {
@@ -31,7 +31,7 @@ class WalletScreen extends React.Component {
   }
 
   onRefresh = () => {
-    this.props.loadWallet();
+    this.props.loadBalances(true);
   }
 
   renderFooter = () => {
@@ -112,8 +112,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToEvents = (dispatch) => {
   return {
-    loadWallet: () => {
-      dispatch(requestBalances());
+    loadBalances: (forceRefresh) => {
+      dispatch(requestBalances(forceRefresh));
     }
   };
 };

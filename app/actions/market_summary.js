@@ -6,22 +6,28 @@ export const REQUEST_MARKET_SUMMARY = 'REQUEST_MARKET_SUMMARY';
 export const RECEIVE_MARKET_SUMMARY = 'RECEIVE_MARKET_SUMMARY';
 export const MARKET_SUMMARY_ERROR = 'MARKET_SUMMARY_ERROR';
 
-export function requestMarketSummary() {
+export function requestMarketSummary(forceRefresh) {
   return {
-    type: REQUEST_MARKET_SUMMARY
+    type: REQUEST_MARKET_SUMMARY,
+    forceRefresh
   };
 }
 
 function marketSummaryError(error) {
-  console.warn(error);
+  console.warn(error); //TODO handle these gracefully
   return {
     type: MARKET_SUMMARY_ERROR,
     error
   };
 }
 
-export function fetchMarketSummary() {
-  return (dispatch) => {
+export function fetchMarketSummary(forceRefresh) {
+  return (dispatch, getState) => {
+    // do nothing if we have data already, and they aren't force-refreshing
+    if(!forceRefresh && getState().market_summary.market_summary) {
+      return;
+    }
+
     if(ApiHelper.stubbing()) {
       dispatch(receiveMarketSummary(market_summary_data));  
       return;

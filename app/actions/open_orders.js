@@ -7,22 +7,29 @@ export const REQUEST_OPEN_ORDERS = 'REQUEST_OPEN_ORDERS';
 export const RECEIVE_OPEN_ORDERS = 'RECEIVE_OPEN_ORDERS';
 export const OPEN_ORDERS_ERROR = 'OPEN_ORDER_ERROR';
 
-export function requestOpenOrders() {
+export function requestOpenOrders(forceRefresh) {
   return {
-    type: REQUEST_OPEN_ORDERS
+    type: REQUEST_OPEN_ORDERS,
+    forceRefresh
   }
 }
 
 function openOrdersError(error) {
-  console.warn(error);
+  console.warn(error); //TODO handle these gracefully
   return {
     type: OPEN_ORDERS_ERROR,
     error
   }
 }
 
-export function fetchOpenOrders() {
-  return (dispatch) => {
+export function fetchOpenOrders(forceRefresh) {
+  return (dispatch, getState) => {
+
+    // do nothing if we have data already, and they aren't force-refreshing
+    if(!forceRefresh && getState().open_orders.orders_list) {
+      return;
+    }
+
     if(ApiHelper.stubbing()) {
       dispatch(receiveOpenOrders(open_orders_data));  
       return;

@@ -12,8 +12,8 @@ export default function market_summary(state = { market_summary: null, loading: 
     case REQUEST_MARKET_SUMMARY:
     case REQUEST_WALLET:
       return {
-        ...state,                   // keep the existing state,
-        loading: true,              // but change loading to true
+        ...state,
+        loading: action.forceRefresh || !state.market_summary
       };
 
     case RECEIVE_MARKET_SUMMARY:

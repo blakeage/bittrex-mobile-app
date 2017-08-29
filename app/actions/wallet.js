@@ -13,38 +13,44 @@ export const REQUEST_BALANCE = 'REQUEST_BALANCE';
 export const RECEIVE_BALANCE = 'RECEIVE_BALANCE';
 export const BALANCE_ERROR = 'BALANCE_ERROR';
 
-export function requestBalances() {
+export function requestBalances(forceRefresh) {
   return {
-    type: REQUEST_BALANCES
+    type: REQUEST_BALANCES,
+    forceRefresh
   }
 }
 
 function balancesError(error) {
-  console.warn(error);
+  console.warn(error); //TODO handle these gracefully
   return {
     type: BALANCES_ERROR,
     error
   }
 }
 
-export function fetchBalances() {
-  return (dispatch) => {
-    
+export function fetchBalances(forceRefresh) {
+  return (dispatch, getState) => {
+    // do nothing if we have data already, and they aren't force-refreshing
+    if(!forceRefresh && getState().wallet.wallet) {
+      dispatch(requestMarketSummary(forceRefresh));
+      return;
+    }   
+
     if(ApiHelper.stubbing()) {
       dispatch(receiveBalances(balances_data));
-      dispatch(requestMarketSummary());
+      dispatch(requestMarketSummary(forceRefresh));
+      return
     }
-    else {
-      var uri = ApiHelper.getApiUri('/account/getbalances');
-      fetch(uri, {
-        method: 'GET',
-        headers: { 'apisign': ApiHelper.getSignature(uri) }
-      })
-      .then(response => response.json())
-      .then(json => dispatch(receiveBalances(json)))
-      .then(() => dispatch(requestMarketSummary()))
-      .catch(error => dispatch(balancesError(error)));
-    }
+
+    var uri = ApiHelper.getApiUri('/account/getbalances');
+    fetch(uri, {
+      method: 'GET',
+      headers: { 'apisign': ApiHelper.getSignature(uri) }
+    })
+    .then(response => response.json())
+    .then(json => dispatch(receiveBalances(json)))
+    .then(() => dispatch(requestMarketSummary(forceRefresh)))
+    .catch(error => dispatch(balancesError(error)));
   };
 }
 
@@ -63,37 +69,42 @@ export function receiveBalances(json) {
   };
 }
 
-export function requestBalance(currency) {
+export function requestBalance(forceRefresh, currency) {
   return {
     type: REQUEST_BALANCE,
+    forceRefresh,
     currency
   }
 }
 
 function balanceError(error) {
-  console.warn(error);
+  console.warn(error); //TODO handle these gracefully
   return {
     type: BALANCE_ERROR,
     error
   }
 }
 
-export function fetchBalance(currency) {
-  return (dispatch) => {
-    
+export function fetchBalance(forceRefresh, currency) {
+  return (dispatch, getState) => {
+    // do nothing if we have data already, and they aren't force-refreshing
+    if(!forceRefresh && getState().wallet.wallet && getState().wallet.wallet.getCoinBalance(currency)) {
+      return;
+    }   
+
     if(ApiHelper.stubbing()) {
       dispatch(receiveBalance(balance_data));
+      return;
     }
-    else {
-      var uri = ApiHelper.getApiUri('/account/getbalance', { "currency": currency });
-      fetch(uri, {
-        method: 'GET',
-        headers: { 'apisign': ApiHelper.getSignature(uri) }
-      })
-      .then(response => response.json())
-      .then(json => dispatch(receiveBalance(json)))
-      .catch(error => dispatch(balanceError(error)));
-    }
+
+    var uri = ApiHelper.getApiUri('/account/getbalance', { "currency": currency });
+    fetch(uri, {
+      method: 'GET',
+      headers: { 'apisign': ApiHelper.getSignature(uri) }
+    })
+    .then(response => response.json())
+    .then(json => dispatch(receiveBalance(json)))
+    .catch(error => dispatch(balanceError(error)));
   };
 }
 

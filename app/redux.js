@@ -16,23 +16,23 @@ export const apiMiddleware = store => next => action => {
   switch (action.type) {
 
     case REQUEST_ORDER_HISTORY:
-      store.dispatch(fetchOrderHistory());
+      store.dispatch(fetchOrderHistory(action.forceRefresh));
       break;
 
     case REQUEST_OPEN_ORDERS:
-      store.dispatch(fetchOpenOrders());
+      store.dispatch(fetchOpenOrders(action.forceRefresh));
       break;
 
     case REQUEST_BALANCES:
-      store.dispatch(fetchBalances());
+      store.dispatch(fetchBalances(action.forceRefresh));
       break;
 
     case REQUEST_BALANCE:
-      store.dispatch(fetchBalance(action.currency));
+      store.dispatch(fetchBalance(action.forceRefresh, action.currency));
       break;
 
     case REQUEST_MARKET_SUMMARY:
-      store.dispatch(fetchMarketSummary());
+      store.dispatch(fetchMarketSummary(action.forceRefresh));
       break;
 
     default:

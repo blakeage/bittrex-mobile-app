@@ -8,8 +8,8 @@ export default function order_history(state = { orders_list: null, loading: true
   switch (action.type) {
     case REQUEST_ORDER_HISTORY:
       return {
-        ...state,                   // keep the existing state,
-        loading: true,              // but change loading to true
+        ...state,
+        loading: action.forceRefresh || !state.orders_list
       };
 
     case RECEIVE_ORDER_HISTORY:

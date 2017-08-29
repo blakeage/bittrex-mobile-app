@@ -14,7 +14,7 @@ class OpenOrdersScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.props.loadOrders();
+    this.props.loadOrders(false);
   }
 
   orders = () => {
@@ -23,7 +23,7 @@ class OpenOrdersScreen extends React.Component {
   }
 
   onRefresh = () => {
-    this.props.loadOrders();
+    this.props.loadOrders(true);
   }
 
   searchChanged = (text) => {
@@ -76,8 +76,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToEvents = (dispatch) => {
   return {
-    loadOrders: () => {
-      dispatch(requestOpenOrders());
+    loadOrders: (forceRefresh) => {
+      dispatch(requestOpenOrders(forceRefresh));
     }
   };
 };

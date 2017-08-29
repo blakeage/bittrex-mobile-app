@@ -12,10 +12,15 @@ import { RECEIVE_MARKET_SUMMARY } from '../actions/market_summary';
 export default function wallet(state = { wallet: null, loading: true }, action) {
   switch (action.type) {
     case REQUEST_BALANCES:
+      return {
+        ...state,
+        loading: action.forceRefresh || !state.wallet
+      };
+
     case REQUEST_BALANCE:
       return {
-        ...state,                   // keep the existing state,
-        loading: true,              // but change loading to true
+        ...state,
+        loading: action.forceRefresh || !state.wallet || !state.wallet.getCoinBalance(action.currency)
       };
 
     case RECEIVE_BALANCES:

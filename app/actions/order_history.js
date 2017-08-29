@@ -7,22 +7,28 @@ export const REQUEST_ORDER_HISTORY = 'REQUEST_ORDER_HISTORY';
 export const RECEIVE_ORDER_HISTORY = 'RECEIVE_ORDER_HISTORY';
 export const ORDER_HISTORY_ERROR = 'ORDER_HISTORY_ERROR';
 
-export function requestOrderHistory() {
+export function requestOrderHistory(forceRefresh) {
   return {
-    type: REQUEST_ORDER_HISTORY
-  }
+    type: REQUEST_ORDER_HISTORY,
+    forceRefresh
+  };
 }
 
 function orderHistoryError(error) {
-  console.warn(error);
+  console.warn(error); //TODO handle these gracefully
   return {
     type: ORDER_HISTORY_ERROR,
     error
   }
 }
 
-export function fetchOrderHistory() {
-  return (dispatch) => {
+export function fetchOrderHistory(forceRefresh) {
+  return (dispatch, getState) => {
+    // do nothing if we have data already, and they aren't force-refreshing
+    if(!forceRefresh && getState().order_history.orders_list) {
+      return;
+    }
+
     if(ApiHelper.stubbing()) {
       dispatch(receiveOrderHistory(order_history_data));  
       return;
