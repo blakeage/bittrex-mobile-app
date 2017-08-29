@@ -18,19 +18,13 @@ class OpenOrdersScreen extends React.Component {
   }
 
   orders = () => {
-    if(!this.props.orders_list) return [];
+    if(this.props.loading) return [];
     return this.props.orders_list.search(this.state.searchStr);
   }
 
-  renderFooter = () => {
-    if (!this.props.loading) return null;
-
-    return (
-      <View style={{paddingVertical: 20, borderTopWidth: 1, borderColor: "#CED0CE"}}>
-        <ActivityIndicator animating size="large" />
-      </View>
-    );
-  };
+  onRefresh = () => {
+    this.props.loadOrders();
+  }
 
   searchChanged = (text) => {
     this.setState({ searchStr: text });
@@ -58,8 +52,9 @@ class OpenOrdersScreen extends React.Component {
           data={this.orders()}
           renderItem={({item}) => { return ( <OpenOrderListItem item={item} itemSelected={this._onSelectOrder} /> ); }}
           keyExtractor={item => item.orderUuid}
-          ListFooterComponent={this.renderFooter}
           ListHeaderComponent={this.renderHeader}
+          refreshing={this.props.loading}
+          onRefresh={this.onRefresh}
         />
       </View>
     );
