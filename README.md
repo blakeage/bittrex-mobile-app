@@ -10,7 +10,7 @@ The app is built in [React Native](https://facebook.github.io/react-native), and
 API keys are currently hard-coded in the ApiHelper.js file. An ApiHelper.js.example file is included in app/models.  Add your keys to this file, and then save it as ApiHelper.js
 
 ### Redux State Shape
-```json
+```JSON
 {
   wallet: { wallet: "a Wallet model object", loading: true/false },
   order_history: { orders_list: "an OrdersList model object", loading: true/false },
