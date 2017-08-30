@@ -1,5 +1,5 @@
 # Bittrex.com Mobile App
-An Unofficial mobile app for [bittrex.com](http://bittrex.com) crypto-currency exchange 
+An unofficial mobile app for [bittrex.com](http://bittrex.com) crypto-currency exchange 
 
 ## Purpose 
 The purpose of the project is to build a mobile app consuming the bittrex.com API.
@@ -20,7 +20,7 @@ API keys are currently hard-coded in the ApiHelper.js file. An ApiHelper.js.exam
 ```
 
 ## Initial Goals
-Initial support is for READ-only access to the API, with the ability to trade coming afterwards.
+Initial support is for READ-only access to the API, with the ability to trade coming later.  This is my first foray into React Native, so I'm tackling the basics to get started.
 
 ## Related links 
 https://github.com/mvayngrib/react-native-crypto
