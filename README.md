@@ -12,10 +12,10 @@ API keys are currently hard-coded in the ApiHelper.js file. An ApiHelper.js.exam
 ### Redux State Shape
 ```JSON
 {
-  wallet: { wallet: "a Wallet model object", loading: true/false },
-  order_history: { orders_list: "an OrdersList model object", loading: true/false },
-  market_summary: { market_summary: "a MarketSummary model object", loading: true/false },
-  open_orders: { orders_list: "an OrdersList model object", loading: true/false }
+  wallet: { wallet: "a Wallet model object", loading: true },
+  order_history: { orders_list: "an OrdersList model object", loading: true },
+  market_summary: { market_summary: "a MarketSummary model object", loading: true },
+  open_orders: { orders_list: "an OrdersList model object", loading: true }
 }
 ```
 
