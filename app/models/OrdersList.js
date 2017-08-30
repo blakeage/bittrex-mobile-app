@@ -16,9 +16,7 @@ class OrdersList {
   }
 
   search(coin) {
-    if(!coin) {
-      return this._orders;
-    }
+    if(!coin) return this._orders;
     return this._orders.filter(order => order.exchange.toLowerCase().includes("-" + coin.toLowerCase()));
   }
 }

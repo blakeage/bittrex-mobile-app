@@ -1,20 +1,22 @@
+import CoinMarketSummary from './CoinMarketSummary';
+
 class MarketSummary {
 
   constructor() {
-    this._coinSummaries = [];
+    this._coinMarketSummaries = [];
   }
 
-  setCoinSummaries(coinSummaries) {
-    this._coinSummaries = coinSummaries;
+  setCoinMarketSummaries(cms) {
+    this._coinMarketSummaries = cms;
   }
 
-  hasCoinSummaries() {
-    return this._coinSummaries.length > 0;
+  hasCoinMarketSummaries() {
+    return this._coinMarketSummaries.length > 0;
   }
 
-  getLast(market, coin) {
-    if(!this.hasCoinSummaries() || (market=="BTC" && coin=="BTC")) return 0; 
-    return this._coinSummaries.find(summary => summary.MarketName === market + "-" + coin).Last;
+  getCoinMarketSummary(market, coin) {
+    if(!this.hasCoinMarketSummaries() || (market=="BTC" && coin=="BTC")) return null; 
+    return this._coinMarketSummaries.find(summary => summary.marketName === market + "-" + coin);
   }
 }
 

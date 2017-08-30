@@ -2,7 +2,7 @@ class CoinBalance {
 
   constructor(attributes) {
     this.populateFromData(attributes);
-    this.last = 0.0;
+    this.marketSummary = null;
   }
 
   populateFromData(attributes) {
@@ -10,7 +10,10 @@ class CoinBalance {
     this.balance = attributes.Balance;
     this.available = attributes.Available;
     this.pending = attributes.Pending;
-    this.last = 0.0;
+  }
+
+  setMarketSummary(summary) {
+    this.marketSummary = summary;
   }
 }
 

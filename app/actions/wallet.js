@@ -39,7 +39,7 @@ export function fetchBalances(forceRefresh) {
     if(ApiHelper.stubbing()) {
       dispatch(receiveBalances(balances_data));
       dispatch(requestMarketSummary(forceRefresh));
-      return
+      return;
     }
 
     var uri = ApiHelper.getApiUri('/account/getbalances');
@@ -55,17 +55,9 @@ export function fetchBalances(forceRefresh) {
 }
 
 export function receiveBalances(json) {
-  let wallet = new Wallet();
-  let results = json.result;
-
-  if(results.length > 0) {
-    let balances = results.map((bal_data) => { return new CoinBalance(bal_data); });
-    wallet.setCoinBalances(balances);
-  }
-
   return { 
     type: RECEIVE_BALANCES,
-    wallet: wallet
+    balances: json.result 
   };
 }
 

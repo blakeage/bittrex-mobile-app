@@ -1,3 +1,4 @@
+import Util from './Util';
 import CoinBalance from './CoinBalance';
 
 class Wallet {
@@ -18,9 +19,14 @@ class Wallet {
     return this._coinBalances.length > 0;
   }
 
-  updateCoinBalance(currency, balance) {
+  updateOrSetCoinBalance(currency, balance) {
     let coinBal = this.getCoinBalance(currency);
-    if(coinBal) coinBal.populateFromData(balance);
+    if(coinBal) {
+      coinBal.populateFromData(balance);
+    }
+    else {
+      this._coinBalances.push(new CoinBalance(balance));      
+    }
   }
 
   getCoinBalance(currency) {
@@ -28,22 +34,22 @@ class Wallet {
     return this._coinBalances.find(coin => coin.currency.toLowerCase().indexOf(currency.toLowerCase()) != -1);
   }
 
-  getCoinsWithMarketLast(showZero) {
+  getCoinsWithMarketSummary(showZero) {
     let ms = this._getMarketSummary();
     if(!this.hasCoinBalances() 
     || !ms
-    || !ms.hasCoinSummaries()) return [];
+    || !ms.hasCoinMarketSummaries()) return [];
 
-    var coinsWithLast = this._filterCoins(showZero);
-    coinsWithLast.map(coin => coin.last = ms.getLast("BTC", coin.currency));
-    return coinsWithLast;
+    var coinsWithSummary = this._filterCoins(showZero);
+    coinsWithSummary.map(coin => coin.setMarketSummary(ms.getCoinMarketSummary("BTC", coin.currency)));
+    return coinsWithSummary;
   }
 
   getTotalBtc() {
     let ms = this._getMarketSummary();
     if(!this.hasCoinBalances() 
     || !ms
-    || !ms.hasCoinSummaries()) return 0;
+    || !ms.hasCoinMarketSummaries()) return 0;
 
     let total = 0;
     this._getCoinBalances().forEach(function(coin) {
@@ -51,16 +57,16 @@ class Wallet {
         total += coin.available;
       }
       else {
-        total += coin.available * ms.getLast("BTC", coin.currency);
+        total += coin.available * ms.getCoinMarketSummary("BTC", coin.currency).last;
       }
     });
-    return total;
+    return Util.formatNbr(total, 8);
   }
 
   getTotalUsd() {
     let ms = this._getMarketSummary();
     if(!ms) return 0;
-    return this.getTotalBtc() * ms.getLast("USDT", "BTC"); 
+    return Util.round(this.getTotalBtc() * ms.getCoinMarketSummary("USDT", "BTC").last, 2);
   }
 
   // private methods

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { StyleSheet, View, FlatList, ActivityIndicator, Text, Switch } from 'react-native';
 import HLText from '../HLText/HLText';
 import WalletListItem from '../WalletListItem/WalletListItem';
-import Util from '../../models/Util';
 import { connect } from 'react-redux';
 import { requestBalances } from '../../actions/wallet';
 import styles from '../../config/styles';
@@ -23,7 +22,7 @@ class WalletScreen extends React.Component {
 
   wallet_data = () => {
     if(this.props.loading) return [];
-    return this.props.wallet.getCoinsWithMarketLast(this.state.showZero);
+    return this.props.wallet.getCoinsWithMarketSummary(this.state.showZero);
   }
 
   toggleZeroBalances = (val) => {
@@ -60,14 +59,14 @@ class WalletScreen extends React.Component {
 
         <View style={styles.listHeader}>
           <Text style={{fontWeight: 'bold'}}>Estimated Value:</Text>
-          <HLText>{Util.formatNbr(this.props.wallet.getTotalBtc(), 8)} BTC / ${Util.round(this.props.wallet.getTotalUsd(), 2)} USD</HLText>
+          <HLText>{this.props.wallet.getTotalBtc()} BTC / ${this.props.wallet.getTotalUsd()} USD</HLText>
         </View>
       </View>
     );
   }
 
   render() {
-    var btcPrice = this.props.marketSummary ? this.props.marketSummary.getLast("USDT", "BTC") : 0;
+    var btcPrice = this.props.marketSummary ? this.props.marketSummary.getCoinMarketSummary("USDT", "BTC").last : 0;
     return (
       <View style={styles.container}>
         <FlatList

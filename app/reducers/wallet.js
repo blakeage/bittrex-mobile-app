@@ -6,6 +6,7 @@ import {
   RECEIVE_BALANCE,
   BALANCE_ERROR
 } from '../actions/wallet';
+import Wallet from '../models/Wallet';
 
 import { RECEIVE_MARKET_SUMMARY } from '../actions/market_summary';
 
@@ -24,9 +25,15 @@ export default function wallet(state = { wallet: null, loading: true }, action) 
       };
 
     case RECEIVE_BALANCES:
+      var wallet = state.wallet || new Wallet();
+
+      action.balances.forEach(function(bal) {
+        wallet.updateOrSetCoinBalance(bal.Currency, bal);
+      });
+
       return {
         loading: true,
-        wallet: action.wallet,
+        wallet: wallet,
       };
 
     case RECEIVE_MARKET_SUMMARY:
@@ -39,7 +46,7 @@ export default function wallet(state = { wallet: null, loading: true }, action) 
 
     case RECEIVE_BALANCE:
       var newWallet = state.wallet;
-      newWallet.updateCoinBalance(action.balance.Currency, action.balance);
+      newWallet.updateOrSetCoinBalance(action.balance.Currency, action.balance);
       return {
         loading: false,
         wallet: newWallet,

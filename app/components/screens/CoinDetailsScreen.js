@@ -49,9 +49,9 @@ class CoinDetailsScreen extends React.Component {
   }
 
   render() {
-    var btcPrice = this.props.market_summary.getLast("USDT", "BTC");
-    var last = this.props.market_summary.getLast("BTC", this._currency);
-    var coinBal = this.props.wallet.getCoinBalance(this._currency);
+    let btcPrice = this.props.market_summary.getCoinMarketSummary("USDT", "BTC").last;
+    let last = this.props.market_summary.getCoinMarketSummary("BTC", this._currency).last;
+    let coinBal = this.props.wallet.getCoinBalance(this._currency);
 
     return (
       <ScrollView

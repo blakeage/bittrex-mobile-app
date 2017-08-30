@@ -1,5 +1,6 @@
 import MarketSummary from '../models/MarketSummary';
 import ApiHelper from '../models/ApiHelper';
+import CoinMarketSummary from '../models/CoinMarketSummary';
 import market_summary_data from "../api_data/market_summary_data.json";
 
 export const REQUEST_MARKET_SUMMARY = 'REQUEST_MARKET_SUMMARY';
@@ -49,7 +50,8 @@ export function receiveMarketSummary(json) {
   let results = json.result;
 
   if(results.length > 0) {
-    ms.setCoinSummaries(results);
+    let cms = results.map((cms_data) => { return new CoinMarketSummary(cms_data); });
+    ms.setCoinMarketSummaries(cms);
   }
   return {
     type: RECEIVE_MARKET_SUMMARY,
