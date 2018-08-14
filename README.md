@@ -1,5 +1,5 @@
 # Bittrex.com Mobile App
-An unofficial mobile app for [bittrex.com](http://bittrex.com) crypto-currency exchange 
+An unofficial mobile app for [bittrex.com](http://bittrex.com) crypto-currency exchange.  Please note, this is likely out of sync with their latest API.  I have stopped working on it (for now), but if anyone wants to contribute, please reach out.
 
 ## Purpose 
 The purpose of the project is to build a mobile app consuming the bittrex.com API.
